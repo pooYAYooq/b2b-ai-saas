@@ -10,6 +10,14 @@ import { HeroHeader } from "./header";
 import BackgroundImage from "@/public/night-background.webp";
 import HeroLight from "@/public/screenshot-light.png";
 import HeroDark from "@/public/screenshot-dark.png";
+import ArcjetLogo from "@/public/companies/arcjet.png";
+import KindeLogo from "@/public/companies/kindle.png";
+import VercelLogo from "@/public/companies/vercel.svg";
+import PrismaLogo from "@/public/companies/prisma.svg";
+import NeonDbLogo from "@/public/companies/neon.png";
+import OrpcLogo from "@/public/companies/orpc.webp";
+import MotionLogo from "@/public/companies/motion.png";
+
 const transitionVariants = {
   item: {
     hidden: {
@@ -222,67 +230,53 @@ export default function HeroSection() {
             </div>
             <div className="group-hover:blur-xs mx-auto mt-12 grid max-w-2xl grid-cols-4 gap-x-12 gap-y-8 transition-all duration-500 group-hover:opacity-50 sm:gap-x-16 sm:gap-y-14">
               <div className="flex">
-                <img
-                  className="mx-auto h-5 w-fit dark:invert"
-                  src="https://html.tailus.io/blocks/customers/nvidia.svg"
-                  alt="Nvidia Logo"
-                  height="20"
-                  width="auto"
+                <Image
+                  className="mx-auto h-7 object-contain dark:invert"
+                  src={ArcjetLogo}
+                  alt="Arcjet Logo"
                 />
               </div>
 
               <div className="flex">
-                <img
+                <Image
                   className="mx-auto h-4 w-fit dark:invert"
-                  src="https://html.tailus.io/blocks/customers/column.svg"
-                  alt="Column Logo"
-                  height="16"
-                  width="auto"
+                  src={KindeLogo}
+                  alt="Kind Logo"
                 />
               </div>
               <div className="flex">
-                <img
+                <Image
                   className="mx-auto h-4 w-fit dark:invert"
-                  src="https://html.tailus.io/blocks/customers/github.svg"
-                  alt="GitHub Logo"
-                  height="16"
-                  width="auto"
+                  src={VercelLogo}
+                  alt="Vercel Logo"
                 />
               </div>
               <div className="flex">
-                <img
-                  className="mx-auto h-5 w-fit dark:invert"
-                  src="https://html.tailus.io/blocks/customers/nike.svg"
-                  alt="Nike Logo"
-                  height="20"
-                  width="auto"
+                <Image
+                  className="mx-auto h-5 w-fit invert dark:invert-0"
+                  src={NeonDbLogo}
+                  alt="Neon Db Logo"
                 />
               </div>
               <div className="flex">
-                <img
-                  className="mx-auto h-5 w-fit dark:invert"
-                  src="https://html.tailus.io/blocks/customers/lemonsqueezy.svg"
-                  alt="Lemon Squeezy Logo"
-                  height="20"
-                  width="auto"
+                <Image
+                  className="mx-auto h-6 w-fit "
+                  src={OrpcLogo}
+                  alt="Orpc Logo"
                 />
               </div>
               <div className="flex">
-                <img
-                  className="mx-auto h-4 w-fit dark:invert"
-                  src="https://html.tailus.io/blocks/customers/laravel.svg"
-                  alt="Laravel Logo"
-                  height="16"
-                  width="auto"
+                <Image
+                  className="mx-auto h-6 w-fit dark:invert"
+                  src={PrismaLogo}
+                  alt="Prisma Logd"
                 />
               </div>
               <div className="flex">
-                <img
-                  className="mx-auto h-7 w-fit dark:invert"
-                  src="https://html.tailus.io/blocks/customers/lilly.svg"
-                  alt="Lilly Logo"
-                  height="28"
-                  width="auto"
+                <Image
+                  className="mx-auto h-7 w-fit invert dark:invert-0"
+                  src={MotionLogo}
+                  alt="Motion Logo"
                 />
               </div>
 
