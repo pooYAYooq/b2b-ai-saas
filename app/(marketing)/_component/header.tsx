@@ -1,11 +1,15 @@
 "use client";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import React from "react";
 import { cn } from "@/lib/utils";
 import Logo from "@/public/logo.png";
 import Image from "next/image";
+import {
+  RegisterLink,
+  LoginLink,
+} from "@kinde-oss/kinde-auth-nextjs/components";
 
 const menuItems = [
   { name: "Features", href: "#link" },
@@ -92,7 +96,16 @@ export const HeroHeader = () => {
                 </ul>
               </div>
               <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
-                <Button
+                <LoginLink
+                  className={buttonVariants({
+                    variant: "outline",
+                    size: "sm",
+                    className: cn(isScrolled && "lg:hidden"),
+                  })}
+                >
+                  Login
+                </LoginLink>
+                {/* <Button
                   asChild
                   variant="outline"
                   size="sm"
@@ -101,16 +114,24 @@ export const HeroHeader = () => {
                   <Link href="#">
                     <span>Login</span>
                   </Link>
-                </Button>
-                <Button
+                </Button> */}
+                <RegisterLink
+                  className={buttonVariants({
+                    size: "sm",
+                    className: cn(isScrolled && "lg:hidden"),
+                  })}
+                >
+                  Sign Up
+                </RegisterLink>
+                {/* <Button
                   asChild
-                  size="sm"
+                  size: "sm",
                   className={cn(isScrolled && "lg:hidden")}
                 >
                   <Link href="#">
                     <span>Sign Up</span>
                   </Link>
-                </Button>
+                </Button> */}
                 <Button
                   asChild
                   size="sm"
