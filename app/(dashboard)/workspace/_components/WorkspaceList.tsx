@@ -13,6 +13,17 @@ export function WorkspaceList() {
     { id: "4", name: "Initech", initials: "In" },
   ];
 
+  const colorCombinations = [
+    "bg-blue-500 hover:bg-blue-600 text-white",
+    "bg-emerald hover:bg-emerald-600 text-white",
+    "bg-purple-500 hover:bg-purple-600 text-white",
+    "bg-amber-500 hover:bg-amber-600 text-white",
+    "bg-rose-500 hover:bg-rose-600 text-white",
+    "bg-indigo-500 hover:bg-indigo-600 text-white",
+    "bg-cyan-500 hover:bg-cyan-600 text-white",
+    "bg-lime-500 hover:bg-lime-600 text-white",
+  ];
+
   return (
     <TooltipProvider>
       <div className="flex flex-col gap-2">
