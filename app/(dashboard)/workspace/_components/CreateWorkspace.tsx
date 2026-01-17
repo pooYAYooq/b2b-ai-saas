@@ -1,7 +1,11 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
-import { Tooltip, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 
@@ -21,6 +25,7 @@ export function CreateWorkspace() {
             </Button>
           </DialogTrigger>
         </TooltipTrigger>
+        <TooltipContent side="right">Create Workspace</TooltipContent>
       </Tooltip>
     </Dialog>
   );
