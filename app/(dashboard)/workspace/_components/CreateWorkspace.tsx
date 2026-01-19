@@ -9,15 +9,29 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Plus } from "lucide-react";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 export function CreateWorkspace() {
   const [open, setOpen] = useState(false);
+  const form = useForm();
+
+  function onSubmit() {
+    console.log("Data submitted");
+  }
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <Tooltip>
@@ -43,6 +57,25 @@ export function CreateWorkspace() {
             Create a new workspace to get started.
           </DialogDescription>
         </DialogHeader>
+        <Form {...form}>
+          <form className="space-y-6">
+            <FormField
+              control={form.control}
+              name="will be changed"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <input {...field} placeholder="Team Workspace" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <Button type="submit">Create Workspace</Button>
+          </form>
+        </Form>
       </DialogContent>
     </Dialog>
   );
