@@ -1,6 +1,13 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import {
   Tooltip,
   TooltipContent,
@@ -25,8 +32,18 @@ export function CreateWorkspace() {
             </Button>
           </DialogTrigger>
         </TooltipTrigger>
-        <TooltipContent side="right">Create Workspace</TooltipContent>
+        <TooltipContent side="right">
+          <p>Create Workspace</p>
+        </TooltipContent>
       </Tooltip>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Create Workspace</DialogTitle>
+          <DialogDescription>
+            Create a new workspace to get started.
+          </DialogDescription>
+        </DialogHeader>
+      </DialogContent>
     </Dialog>
   );
 }
