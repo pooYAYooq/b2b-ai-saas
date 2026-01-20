@@ -24,10 +24,17 @@ import {
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { workspaceSchema } from "@/app/schemas/workspace";
 
 export function CreateWorkspace() {
   const [open, setOpen] = useState(false);
-  const form = useForm();
+  const form = useForm({
+    resolver: zodResolver(workspaceSchema),
+    defaultValues: {
+      name: "",
+    },
+  });
 
   function onSubmit() {
     console.log("Data submitted");
@@ -58,10 +65,10 @@ export function CreateWorkspace() {
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
-              name="will be changed"
+              name="name"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Name</FormLabel>
