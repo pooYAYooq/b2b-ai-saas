@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import { WorkspaceList } from "./_components/WorkspaceList";
 import { CreateWorkspace } from "./_components/CreateWorkspace";
+import { UserNav } from "./_components/UserNav";
 
 const WorkspaceLayout = ({ children }: { children: ReactNode }) => {
   return (
@@ -10,6 +11,10 @@ const WorkspaceLayout = ({ children }: { children: ReactNode }) => {
         <WorkspaceList />
         <div className="mt-4">
           <CreateWorkspace />
+        </div>
+        <div className="mt-auto">
+          {/* Additional sidebar items can be added here */}
+          <UserNav />
         </div>
       </div>
     </div>
