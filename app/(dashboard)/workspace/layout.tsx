@@ -17,6 +17,7 @@ const WorkspaceLayout = ({ children }: { children: ReactNode }) => {
           <UserNav />
         </div>
       </div>
+      {children}
     </div>
   );
 };
