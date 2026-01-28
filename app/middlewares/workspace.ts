@@ -2,7 +2,7 @@ import { KindeOrganization } from "@kinde-oss/kinde-auth-nextjs";
 import { base } from "./base";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
-export const requiredAuthMiddleware = base
+export const requiredWorkspaceMiddleware = base
   .$context<{
     workspace?: KindeOrganization<unknown | null>;
   }>()
