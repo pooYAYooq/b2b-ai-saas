@@ -4,9 +4,11 @@ import { os } from "@orpc/server";
 import { z } from "zod";
 import { base } from "../middlewares/base";
 import { requiredAuthMiddleware } from "../middlewares/auth";
+import { requiredWorkspaceMiddleware } from "../middlewares/workspace";
 
 export const listWorkspaces = base
   .use(requiredAuthMiddleware)
+  .use(requiredWorkspaceMiddleware)
   .route({
     method: "GET",
     path: "/workspace",
@@ -20,7 +22,7 @@ export const listWorkspaces = base
         z.object({
           id: z.string(),
           name: z.string(),
-          initials: z.string(),
+          avatar: z.string(),
         }),
       ),
       user: z.custom<KindeUser<Record<string, unknown>>>(),
@@ -36,7 +38,7 @@ export const listWorkspaces = base
       workspaces: organizations?.orgs.map((org) => ({
         id: org.code,
         name: org.name,
-        initials: org.name?.charAt(0),
+        avatar: org.name?.charAt(0),
       })),
       user: context.user,
     };

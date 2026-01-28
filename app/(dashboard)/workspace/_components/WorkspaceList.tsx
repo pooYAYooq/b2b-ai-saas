@@ -9,10 +9,10 @@ import { cn } from "@/lib/utils";
 
 export function WorkspaceList() {
   const workspaces = [
-    { id: "1", name: "Nexus", initials: "Nx" },
-    { id: "2", name: "Acme Corp", initials: "AC" },
-    { id: "3", name: "Globex", initials: "Gl" },
-    { id: "4", name: "Initech", initials: "In" },
+    { id: "1", name: "Nexus", avatar: "Nx" },
+    { id: "2", name: "Acme Corp", avatar: "AC" },
+    { id: "3", name: "Globex", avatar: "Gl" },
+    { id: "4", name: "Initech", avatar: "In" },
   ];
 
   const colorCombinations = [
@@ -44,11 +44,11 @@ export function WorkspaceList() {
                 size="icon"
                 className={cn(
                   "size-12 transition-all duration-300",
-                  getWorkspaceColor(workspace.id)
+                  getWorkspaceColor(workspace.id),
                 )}
               >
                 <span className="text-sm font-semibold">
-                  {workspace.initials}
+                  {workspace.avatar}
                 </span>
               </Button>
             </TooltipTrigger>
