@@ -20,6 +20,9 @@ importers:
       '@orpc/server':
         specifier: ^1.13.4
         version: 1.13.4
+      '@orpc/tanstack-query':
+        specifier: ^1.13.4
+        version: 1.13.4(@orpc/client@1.13.4)(@tanstack/query-core@5.90.20)
       '@radix-ui/react-avatar':
         specifier: ^1.1.11
         version: 1.1.11(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -589,6 +592,12 @@ packages:
 
   '@orpc/standard-server@1.13.4':
     resolution: {integrity: sha512-ZOzgfVp6XUg+wVYw+gqesfRfGPtQbnBIrIiSnFMtZF+6ncmFJeF2Shc4RI2Guqc0Qz25juy8Ogo4tX3YqysOcg==}
+
+  '@orpc/tanstack-query@1.13.4':
+    resolution: {integrity: sha512-gCL/kh3kf6OUGKfXxSoOZpcX1jNYzxGfo/PkLQKX7ui4xiTbfWw3sCDF30sNS4I7yAOnBwDwJ3N2xzfkTftOBg==}
+    peerDependencies:
+      '@orpc/client': 1.13.4
+      '@tanstack/query-core': '>=5.80.2'
 
   '@radix-ui/primitive@1.1.3':
     resolution: {integrity: sha512-JTF99U/6XIjCBo0wqkU5sK10glYe27MRRsfwoiq5zzOEZLHU3A3KCMa5X/azekYRCJ0HlwI0crAXS/5dEHTzDg==}
@@ -3250,6 +3259,14 @@ snapshots:
   '@orpc/standard-server@1.13.4':
     dependencies:
       '@orpc/shared': 1.13.4
+    transitivePeerDependencies:
+      - '@opentelemetry/api'
+
+  '@orpc/tanstack-query@1.13.4(@orpc/client@1.13.4)(@tanstack/query-core@5.90.20)':
+    dependencies:
+      '@orpc/client': 1.13.4
+      '@orpc/shared': 1.13.4
+      '@tanstack/query-core': 5.90.20
     transitivePeerDependencies:
       - '@opentelemetry/api'
 
