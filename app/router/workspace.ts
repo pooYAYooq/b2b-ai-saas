@@ -1,6 +1,5 @@
 import { KindeOrganization, KindeUser } from "@kinde-oss/kinde-auth-nextjs";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { os } from "@orpc/server";
 import { z } from "zod";
 import { base } from "../middlewares/base";
 import { requiredAuthMiddleware } from "../middlewares/auth";
@@ -29,17 +28,22 @@ export const listWorkspaces = base
       currentWorkspace: z.custom<KindeOrganization<unknown>>(),
     }),
   )
-  .handler(async ({ input, context }) => {
+  .handler(async ({ context, errors }) => {
     const { getUserOrganizations } = getKindeServerSession();
 
     const organizations = await getUserOrganizations();
 
+    if (!organizations) {
+      throw errors.FORBIDDEN();
+    }
+
     return {
       workspaces: organizations?.orgs.map((org) => ({
         id: org.code,
-        name: org.name,
-        avatar: org.name?.charAt(0),
+        name: org.name ?? "My Workspace",
+        avatar: org.name?.charAt(0) ?? "W",
       })),
       user: context.user,
+      currentWorkspace: context.workspace,
     };
   });
