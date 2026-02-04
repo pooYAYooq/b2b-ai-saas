@@ -21,6 +21,15 @@ const colorCombinations = [
   "bg-lime-500 hover:bg-lime-600 text-white",
 ];
 export function WorkspaceList() {
+  /**
+   * Returns a color combination string based on the given id.
+   * The color combination is derived from the sum of the ASCII
+   * values of the characters in the id.
+   * The sum is used as an index to select a color combination
+   * from the array of color combinations.
+   * @param {string} id - the id to generate a color combination for
+   * @returns {string} - the color combination string
+   */
   const getWorkspaceColor = (id: string) => {
     const charSum = id
       .split("")
