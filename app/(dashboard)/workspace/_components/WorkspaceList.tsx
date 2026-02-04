@@ -54,6 +54,9 @@ export function WorkspaceList() {
                   className={cn(
                     "size-12 transition-all duration-300",
                     getWorkspaceColor(workspace.id),
+                    isActive
+                      ? "underline underline-offset-4 rounded-lg"
+                      : "rounded-xl hover:rounded-lg",
                   )}
                 >
                   <span className="text-sm font-semibold">
