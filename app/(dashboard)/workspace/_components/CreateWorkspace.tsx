@@ -1,4 +1,18 @@
+/**
+ * CreateWorkspace Component
+ *
+ * A dialog-based form component for creating new workspaces.
+ * Features Zod validation, ORPC mutations, toast notifications,
+ * and automatic cache invalidation on success.
+ *
+ * @returns {JSX.Element} A button trigger that opens a dialog with workspace creation form
+ *
+ * @example
+ * <CreateWorkspace />
+ */
+
 "use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -31,8 +45,13 @@ import { orpc } from "@/lib/orpc";
 import { toast } from "sonner";
 
 export function CreateWorkspace() {
+  // Controls dialog open/close state
   const [open, setOpen] = useState(false);
+
+  // Query client instance for invalidating workspace list after creation
   const queryClient = useQueryClient();
+
+  // Form instance with Zod schema validation
   const form = useForm({
     resolver: zodResolver(workspaceSchema),
     defaultValues: {
@@ -40,19 +59,23 @@ export function CreateWorkspace() {
     },
   });
 
-  // CreateWorkspace Mutation
-
+  /**
+   * Workspace creation mutation
+   *
+   * Handles the async operation of creating a new workspace.
+   * On success: displays toast, refetches workspace list, resets form, closes dialog
+   * On error: displays error toast and keeps dialog open for retry
+   */
   const CreateWorkspaceMutation = useMutation(
     orpc.workspace.create.mutationOptions({
       onSuccess: (newWorkspace) => {
         toast.success(
           `Workspace ${newWorkspace.workspaceName} created successfully!`,
         );
-
+        // Refetch workspace list to show the new workspace
         queryClient.invalidateQueries({
           queryKey: orpc.workspace.list.queryKey(),
         });
-
         form.reset();
         setOpen(false);
       },
@@ -62,14 +85,21 @@ export function CreateWorkspace() {
     }),
   );
 
+  /**
+   * Form submission handler
+   * Triggers the workspace creation mutation with validated form data
+   */
   function onSubmit(values: WorkspaceSchemaType) {
     CreateWorkspaceMutation.mutate(values);
   }
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
+      {/* Tooltip-wrapped trigger button */}
       <Tooltip>
         <TooltipTrigger asChild>
           <DialogTrigger asChild>
+            {/* Icon button with dashed border style to indicate "add new" action */}
             <Button
               variant="ghost"
               size="icon"
@@ -83,6 +113,8 @@ export function CreateWorkspace() {
           <p>Create Workspace</p>
         </TooltipContent>
       </Tooltip>
+
+      {/* Dialog content with form */}
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Create Workspace</DialogTitle>
@@ -90,8 +122,10 @@ export function CreateWorkspace() {
             Create a new workspace to get started.
           </DialogDescription>
         </DialogHeader>
+
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
+            {/* Workspace name input field */}
             <FormField
               control={form.control}
               name="name"
