@@ -1,3 +1,24 @@
+/**
+ * HeroHeader Component
+ *
+ * Main navigation header for the marketing pages.
+ * Features:
+ * - Responsive design with mobile hamburger menu
+ * - Sticky positioning with blur effect on scroll
+ * - Authentication-aware navigation (Login/Register or Dashboard)
+ * - Smooth transitions and animations
+ *
+ * The header adapts its appearance when scrolled by:
+ * - Adding background blur and border
+ * - Reducing max-width for a contained look
+ * - Maintaining visibility with fixed positioning
+ *
+ * @returns {JSX.Element} Marketing page header with navigation
+ *
+ * @example
+ * <HeroHeader />
+ */
+
 "use client";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
@@ -13,6 +34,10 @@ import {
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
+/**
+ * Navigation menu items displayed in the header.
+ * These are the main sections of the marketing site.
+ */
 const menuItems = [
   { name: "Features", href: "#link" },
   { name: "Solution", href: "#link" },
@@ -43,7 +68,7 @@ export const HeroHeader = () => {
           className={cn(
             "mx-auto mt-2 max-w-6xl px-6 transition-all duration-300 lg:px-12",
             isScrolled &&
-              "bg-background/50 max-w-4xl rounded-2xl border backdrop-blur-lg lg:px-5"
+              "bg-background/50 max-w-4xl rounded-2xl border backdrop-blur-lg lg:px-5",
           )}
         >
           <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">

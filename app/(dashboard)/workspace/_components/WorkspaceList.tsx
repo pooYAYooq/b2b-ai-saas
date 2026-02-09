@@ -1,3 +1,22 @@
+/**
+ * WorkspaceList Component
+ *
+ * Displays a vertical list of all workspaces the user has access to.
+ * Each workspace is represented by a colored button with its avatar (first letter).
+ * Clicking on a workspace triggers re-authentication with that organization context.
+ *
+ * Features:
+ * - Color-coded workspace buttons (8 color combinations)
+ * - Active workspace indicator (rounded corners change on hover)
+ * - Tooltips showing workspace names
+ * - Automatic color assignment based on workspace ID
+ *
+ * @returns {JSX.Element} A list of workspace navigation buttons
+ *
+ * @example
+ * <WorkspaceList />
+ */
+
 "use client";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,6 +30,10 @@ import { cn } from "@/lib/utils";
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
+/**
+ * Predefined color combinations for workspace avatars.
+ * Each workspace gets a consistent color based on its ID.
+ */
 const colorCombinations = [
   "bg-blue-500 hover:bg-blue-600 text-white",
   "bg-purple-500 hover:bg-purple-600 text-white",
@@ -21,6 +44,7 @@ const colorCombinations = [
   "bg-cyan-500 hover:bg-cyan-600 text-white",
   "bg-lime-500 hover:bg-lime-600 text-white",
 ];
+
 export function WorkspaceList() {
   /**
    * Returns a color combination string based on the given id.

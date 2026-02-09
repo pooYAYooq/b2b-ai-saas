@@ -1,3 +1,23 @@
+/**
+ * WorkspaceLayout Component
+ *
+ * Persistent layout for all workspace pages. Provides a fixed sidebar with:
+ * - WorkspaceList: Displays all user workspaces with color-coded avatars
+ * - CreateWorkspace: Button to create new workspaces
+ * - UserNav: User profile menu with account and billing options
+ *
+ * This is a Server Component that prefetches workspace data for optimal performance,
+ * then hydrates it on the client for interactive components.
+ *
+ * @param {Object} props - Component props
+ * @param {ReactNode} props.children - Child pages to render in the main content area
+ * @returns {Promise<JSX.Element>} The workspace layout with sidebar and content area
+ *
+ * @example
+ * // This layout wraps all pages under /workspace/*
+ * // Next.js automatically applies it to the route group
+ */
+
 import React, { ReactNode } from "react";
 import { WorkspaceList } from "./_components/WorkspaceList";
 import { CreateWorkspace } from "./_components/CreateWorkspace";
@@ -22,7 +42,9 @@ const WorkspaceLayout = async ({ children }: { children: ReactNode }) => {
         </div>
         <div className="mt-auto">
           {/* Additional sidebar items can be added here */}
-          <UserNav />
+          <HydrateClient client={queryClient}>
+            <UserNav />
+          </HydrateClient>
         </div>
       </div>
       {children}

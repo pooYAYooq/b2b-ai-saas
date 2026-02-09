@@ -1,3 +1,14 @@
+/**
+ * Workspace Router
+ *
+ * Defines ORPC routes for workspace/organization management.
+ * All routes require authentication and workspace context via middleware.
+ *
+ * Routes:
+ * - listWorkspaces: GET /workspace - Lists all user workspaces
+ * - createWorkspace: POST /workspace - Creates a new workspace
+ */
+
 import { KindeOrganization, KindeUser } from "@kinde-oss/kinde-auth-nextjs";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { z } from "zod";
@@ -7,6 +18,17 @@ import { requiredWorkspaceMiddleware } from "../middlewares/workspace";
 import { workspaceSchema } from "../schemas/workspace";
 import { init, Organizations } from "@kinde/management-api-js";
 
+/**
+ * List Workspaces Route
+ *
+ * Fetches all organizations/workspaces that the authenticated user has access to.
+ * Returns workspace data along with user profile and current workspace context.
+ *
+ * @route GET /workspace
+ * @access Protected - Requires authentication
+ * @returns Array of workspaces with id, name, and avatar, plus user and current workspace data
+ * @throws FORBIDDEN - If user has no organizations or authentication fails
+ */
 export const listWorkspaces = base
   .use(requiredAuthMiddleware)
   .use(requiredWorkspaceMiddleware)
@@ -50,6 +72,19 @@ export const listWorkspaces = base
     };
   });
 
+/**
+ * Create Workspace Route
+ *
+ * Creates a new organization/workspace in Kinde Auth and assigns the current user
+ * as an admin. After creation, refreshes the user's tokens to include the new organization.
+ *
+ * @route POST /workspace
+ * @access Protected - Requires authentication
+ * @param input - Workspace creation data (validated by workspaceSchema)
+ * @param input.name - Name of the new workspace
+ * @returns Object containing the new workspace orgCode and name
+ * @throws FORBIDDEN - If organization creation fails or user assignment fails
+ */
 export const createWorkspace = base
   .use(requiredAuthMiddleware)
   .use(requiredWorkspaceMiddleware)
