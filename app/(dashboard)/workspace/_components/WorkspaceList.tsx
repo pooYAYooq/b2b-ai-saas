@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/tooltip";
 import { orpc } from "@/lib/orpc";
 import { cn } from "@/lib/utils";
+import { LoginLink } from "@kinde-oss/kinde-auth-nextjs";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 const colorCombinations = [
@@ -49,20 +50,22 @@ export function WorkspaceList() {
           return (
             <Tooltip key={workspace.id}>
               <TooltipTrigger asChild>
-                <Button
-                  size="icon"
-                  className={cn(
-                    "size-12 transition-all duration-300",
-                    getWorkspaceColor(workspace.id),
-                    isActive
-                      ? "underline underline-offset-4 rounded-lg"
-                      : "rounded-xl hover:rounded-lg",
-                  )}
-                >
-                  <span className="text-sm font-semibold">
-                    {workspace.avatar}
-                  </span>
-                </Button>
+                <LoginLink orgCode={workspace.id}>
+                  <Button
+                    size="icon"
+                    className={cn(
+                      "size-12 transition-all duration-300",
+                      getWorkspaceColor(workspace.id),
+                      isActive
+                        ? "underline underline-offset-4 rounded-lg"
+                        : "rounded-xl hover:rounded-lg",
+                    )}
+                  >
+                    <span className="text-sm font-semibold">
+                      {workspace.avatar}
+                    </span>
+                  </Button>
+                </LoginLink>
               </TooltipTrigger>
               <TooltipContent side="right">
                 <p>
