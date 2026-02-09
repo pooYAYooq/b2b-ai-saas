@@ -86,8 +86,9 @@ export function CreateWorkspace() {
   );
 
   /**
-   * Form submission handler
-   * Triggers the workspace creation mutation with validated form data
+   * Submits the form data to create a new workspace.
+   * Calls the underlying mutation from `useMutation` with the provided form data.
+   * @param {WorkspaceSchemaType} values - The form data to be submitted for creating a new workspace.
    */
   function onSubmit(values: WorkspaceSchemaType) {
     CreateWorkspaceMutation.mutate(values);
@@ -140,7 +141,9 @@ export function CreateWorkspace() {
               )}
             />
 
-            <Button type="submit">Create Workspace</Button>
+            <Button disabled={CreateWorkspaceMutation.isPending} type="submit">
+              {CreateWorkspaceMutation.isPending ? "Creating..." : "Create"}
+            </Button>
           </form>
         </Form>
       </DialogContent>
