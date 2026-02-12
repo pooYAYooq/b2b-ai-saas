@@ -24,10 +24,15 @@ jobs:
           node-version: "20"
           cache: "pnpm"
 
-      - name: Enable Corepack & prepare pnpm
+      - name: Ensure pnpm is available
         run: |
-          corepack enable
-          corepack prepare pnpm@latest --activate
+          # Prefer Corepack, fall back to global pnpm install if necessary
+          if ! command -v pnpm >/dev/null 2>&1; then
+            corepack enable || true
+            corepack prepare pnpm@latest --activate || npm install -g pnpm@latest
+          fi
+          pnpm -v
+
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
