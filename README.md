@@ -14,20 +14,24 @@ A modern B2B SaaS application built with Next.js 16, featuring workspace managem
 ## 🛠️ Technology Stack
 
 ### Core
+
 - **[Next.js 16](https://nextjs.org)** - React framework with App Router
 - **[React 19](https://react.dev)** - UI library
 - **[TypeScript](https://www.typescriptlang.org/)** - Type safety
 
 ### API & Data Fetching
+
 - **[ORPC](https://orpc.io)** - Type-safe RPC framework
 - **[TanStack Query](https://tanstack.com/query)** - Async state management
 - **[Zod](https://zod.dev)** - Schema validation
 
 ### Authentication
+
 - **[Kinde Auth](https://kinde.com)** - Authentication and organization management
 - **[@kinde/management-api-js](https://github.com/kinde-oss/kinde-management-api-js)** - Kinde Management API
 
 ### UI & Styling
+
 - **[Tailwind CSS](https://tailwindcss.com)** - Utility-first CSS framework
 - **[shadcn/ui](https://ui.shadcn.com)** - Re-usable component library
 - **[Radix UI](https://www.radix-ui.com/)** - Unstyled, accessible UI primitives
@@ -37,7 +41,7 @@ A modern B2B SaaS application built with Next.js 16, featuring workspace managem
 
 ## 📁 Project Structure
 
-```
+```text
 b2b-ai-saas/
 ├── app/
 │   ├── (dashboard)/                # Dashboard route group
@@ -86,23 +90,26 @@ b2b-ai-saas/
 
 ### Prerequisites
 
-- Node.js 20+ 
+- Node.js 20+
 - pnpm 10.28.2+
 
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd b2b-ai-saas
 ```
 
-2. Install dependencies:
+1. Install dependencies:
+
 ```bash
 pnpm install
 ```
 
-3. Set up environment variables:
+1. Set up environment variables:
+
 ```bash
 # Create .env.local file with your Kinde credentials
 KINDE_CLIENT_ID=your_client_id
@@ -113,12 +120,13 @@ KINDE_POST_LOGOUT_REDIRECT_URL=http://localhost:3000
 KINDE_POST_LOGIN_REDIRECT_URL=http://localhost:3000/workspace
 ```
 
-4. Run the development server:
+1. Run the development server:
+
 ```bash
 pnpm dev
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+1. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## 🏗️ Architecture
 
@@ -132,6 +140,7 @@ The application uses ORPC for type-safe API communication:
 - **Server** (`lib/orpc.server.ts`): Server-side router client for SSR
 
 Example route definition:
+
 ```typescript
 export const listWorkspaces = base
   .use(requiredAuthMiddleware)
@@ -201,16 +210,26 @@ The project uses shadcn/ui components with customization:
 
 ## 🧪 Testing
 
+This project uses **Vitest** + **@testing-library/react** for unit and component tests. A minimal test setup is provided in `vitest.config.mts` and `test/setup.ts`.
+
+Common test commands:
+
 ```bash
-# Run linter
-pnpm lint
+# Run tests once (CI-friendly)
+pnpm test
 
-# Build for production
-pnpm build
+# Run tests once with verbose output
+pnpm test -- --run --reporter verbose
 
-# Start production server
-pnpm start
+# Run tests in watch mode while developing
+pnpm test -- --watch
 ```
+
+Notes:
+
+- Test globals (describe/it/expect) are enabled via TypeScript config (`vitest/globals`).
+- Add tests next to components or in a `test/` folder using the `*.test.tsx` / `*.spec.tsx` naming convention.
+- To enable DOM matchers (e.g. `toBeInTheDocument()`), see `test/setup.ts` which imports `@testing-library/jest-dom`.
 
 ## 🚢 Deployment
 
@@ -224,6 +243,7 @@ pnpm start
 ### Other Platforms
 
 The application can be deployed to any platform supporting Next.js:
+
 - AWS Amplify
 - Netlify
 - Railway
