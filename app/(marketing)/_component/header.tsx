@@ -26,6 +26,7 @@ import { buttonVariants } from "@/components/ui/button";
 import React from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import Logo from "@/public/logo.png";
 import {
   RegisterLink,
   LoginLink,
@@ -77,7 +78,7 @@ export const HeroHeader = () => {
                 aria-label="home"
                 className="flex items-center space-x-2"
               >
-                <Image src="/logo.png" alt="Logo" height={32} width={32} />
+                <Image src={Logo} alt="Logo" height={32} width={32} />
                 <h1 className="text-2xl font-bold">
                   <span className="text-primary">Nexus</span>
                 </h1>
