@@ -1,6 +1,7 @@
 # B2B AI SaaS Platform
 
-A modern B2B SaaS application built with Next.js 16, featuring workspace management, type-safe APIs with ORPC, and authentication via Kinde Auth.
+A modern B2B SaaS application built with Next.js 16, featuring workspace \
+management, type-safe APIs with ORPC, and authentication via Kinde Auth.
 
 ## 🚀 Features
 
@@ -29,6 +30,7 @@ A modern B2B SaaS application built with Next.js 16, featuring workspace managem
 
 - **[Kinde Auth](https://kinde.com)** - Authentication and organization management
 - **[@kinde/management-api-js](https://github.com/kinde-oss/kinde-management-api-js)** - Kinde Management API
+- **[Kinde Management API JS](kinde-mgmt)** – Kinde Management API client for JavaScript/TypeScript
 
 ### UI & Styling
 
@@ -136,7 +138,8 @@ The application uses ORPC for type-safe API communication:
 
 - **Routes** (`app/router/`): Define API endpoints with input/output schemas
 - **Middlewares** (`app/middlewares/`): Handle authentication and workspace context
-- **Client** (`lib/orpc.ts`): Client-side ORPC configuration with TanStack Query integration
+- **Client** (`lib/orpc.ts`): Client-side ORPC configuration with TanStack \
+Query integration
 - **Server** (`lib/orpc.server.ts`): Server-side router client for SSR
 
 Example route definition:
@@ -169,7 +172,8 @@ export const listWorkspaces = base
 
 - **Create**: Users can create new workspaces via the `CreateWorkspace` component
 - **List**: All user workspaces are displayed in the `WorkspaceList` sidebar
-- **Switch**: Click on a workspace to switch context (re-authenticates with new org)
+- **Switch**: Click on a workspace to switch context \
+(re-authenticates with new organization)
 - **Permissions**: Admin role is automatically assigned to workspace creators
 
 ## 🎨 UI Components
@@ -210,7 +214,8 @@ The project uses shadcn/ui components with customization:
 
 ## 🧪 Testing
 
-This project uses **Vitest** + **@testing-library/react** for unit and component tests. A minimal test setup is provided in `vitest.config.mts` and `test/setup.ts`.
+This project uses **Vitest** + **@testing-library/react** for unit and \
+component tests. A minimal test setup is provided in `vitest.config.mts` and `test/setup.ts`.
 
 Common test commands:
 
@@ -228,8 +233,10 @@ pnpm test -- --watch
 Notes:
 
 - Test globals (describe/it/expect) are enabled via TypeScript config (`vitest/globals`).
-- Add tests next to components or in a `test/` folder using the `*.test.tsx` / `*.spec.tsx` naming convention.
-- To enable DOM matchers (e.g. `toBeInTheDocument()`), see `test/setup.ts` which imports `@testing-library/jest-dom`.
+- Add tests next to components or in a `test/` folder using the \
+`*.test.tsx` / `*.spec.tsx` naming convention.
+- To enable DOM matchers (e.g. `toBeInTheDocument()`), see `test/setup.ts` \
+which imports `@testing-library/jest-dom`.
 
 ## 🚢 Deployment
 
