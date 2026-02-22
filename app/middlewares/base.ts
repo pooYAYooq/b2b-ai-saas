@@ -29,7 +29,7 @@
 import { os } from "@orpc/server";
 
 export const base = os.$context<{ request: Request }>().errors({
-  RATE_LIMIT: {
+  RATE_LIMITED: {
     message: " You have reached your rate limit for this endpoint.",
   },
   BAD_REQUEST: {

@@ -11,6 +11,8 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@arcjet/inspect": "^1.1.0",
+    "@arcjet/next": "^1.1.0",
     "@hookform/resolvers": "^5.2.2",
     "@kinde-oss/kinde-auth-nextjs": "^2.11.0",
     "@kinde/management-api-js": "^0.14.0",
