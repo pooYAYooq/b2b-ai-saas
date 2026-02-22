@@ -43,6 +43,7 @@ import { workspaceSchema, WorkspaceSchemaType } from "@/app/schemas/workspace";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { orpc } from "@/lib/orpc";
 import { toast } from "sonner";
+import { isDefinedError } from "@orpc/client";
 
 export function CreateWorkspace() {
   // Controls dialog open/close state
@@ -60,11 +61,17 @@ export function CreateWorkspace() {
   });
 
   /**
-   * Workspace creation mutation
+   * Defines the mutation for creating a new workspace.
    *
-   * Handles the async operation of creating a new workspace.
-   * On success: displays toast, refetches workspace list, resets form, closes dialog
-   * On error: displays error toast and keeps dialog open for retry
+   * This uses `@tanstack/react-query`'s `useMutation` hook to handle the
+   * asynchronous creation of a workspace. It provides callbacks for `onSuccess`
+   * and `onError` to give the user feedback.
+   *
+   * - `onSuccess`: A success toast is shown, the list of workspaces is invalidated
+   *   (triggering a refetch), the form is reset, and the dialog is closed.
+   * - `onError`: An error toast is displayed. If the error is a defined API error
+   *   (e.g., rate-limited), a specific message is shown. The dialog remains open
+   *   so the user can correct any issues and retry.
    */
   const CreateWorkspaceMutation = useMutation(
     orpc.workspace.create.mutationOptions({
@@ -79,22 +86,33 @@ export function CreateWorkspace() {
         form.reset();
         setOpen(false);
       },
-      onError: () => {
+      onError: (error) => {
+        if (isDefinedError(error)) {
+          if (error.code === "RATE_LIMITED") {
+            toast.error(error.message);
+            return;
+          }
+          toast.error(error.message);
+          return;
+        }
         toast.error("Failed to create workspace. Please try again.");
       },
     }),
   );
 
   /**
-   * Submits the form data to create a new workspace.
-   * Calls the underlying mutation from `useMutation` with the provided form data.
-   * @param {WorkspaceSchemaType} values - The form data to be submitted for creating a new workspace.
+   * Triggers the workspace creation mutation with the validated form data.
+   * This function is called by `react-hook-form`'s `handleSubmit`
+   * when the form is successfully validated.
+   *
+   * @param {WorkspaceSchemaType} values - The validated form data.
    */
   function onSubmit(values: WorkspaceSchemaType) {
     CreateWorkspaceMutation.mutate(values);
   }
 
   return (
+    // Root container for the workspace creation dialog
     <Dialog open={open} onOpenChange={setOpen}>
       {/* Tooltip-wrapped trigger button */}
       <Tooltip>
@@ -134,7 +152,11 @@ export function CreateWorkspace() {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <input {...field} placeholder="Team Workspace" />
+                    <input
+                      {...field}
+                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      placeholder="Team Workspace"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

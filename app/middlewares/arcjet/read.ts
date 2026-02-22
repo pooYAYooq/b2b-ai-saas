@@ -7,7 +7,7 @@ const buildStandardAj = () =>
     slidingWindow({
       mode: "LIVE",
       interval: "1m", // 1 minute window
-      max: 200, // Allow up to 200 requests per window
+      max: 180, // Allow up to 180 requests per window
     }),
   );
 export const readSecurityMiddleware = base
