@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "test": "vitest"
+    "test": "vitest",
+    "check:arcjet-env": "node -e \"const key=process.env.ARCJET_KEY?.trim(); if(!key){console.error('Missing ARCJET_KEY in environment.'); process.exit(1)}; console.log('ARCJET_KEY is configured.')\"",
+    "verify": "pnpm lint && pnpm typecheck && pnpm test -- --run"
   },
   "dependencies": {
     "@arcjet/inspect": "^1.1.0",
