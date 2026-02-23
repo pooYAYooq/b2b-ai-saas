@@ -1,4 +1,4 @@
-import arcjet, { detectBot, shield } from "@/lib/arcjet";
+import arcjet, { detectBot, protectWithArcjet, shield } from "@/lib/arcjet";
 import { base } from "../base";
 import { KindeUser } from "@kinde-oss/kinde-auth-nextjs";
 
@@ -19,15 +19,29 @@ const buildStandardAj = () =>
     }),
   );
 
+/**
+ * Standard security middleware.
+ *
+ * Applies a bot/shield Arcjet policy for general endpoint protection.
+ * If Arcjet is unavailable (missing key or transient runtime failure), requests continue
+ * and downstream handlers remain available.
+ */
 export const standardSecurityMiddleware = base
   .$context<{
     request: Request;
     user: KindeUser<Record<string, unknown>>;
   }>()
   .middleware(async ({ context, next, errors }) => {
-    const decision = await buildStandardAj().protect(context.request, {
-      userId: context.user.id,
+    const decision = await protectWithArcjet({
+      client: buildStandardAj(),
+      args: [context.request, { userId: context.user.id }],
+      source: "standardSecurityMiddleware",
     });
+
+    if (!decision) {
+      return next();
+    }
+
     if (decision.isDenied()) {
       if (decision.reason.isBot()) {
         throw errors.FORBIDDEN({

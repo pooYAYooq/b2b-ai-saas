@@ -113,13 +113,9 @@ pnpm install
 1. Set up environment variables:
 
 ```bash
-# Create .env.local file with your Kinde credentials
-KINDE_CLIENT_ID=your_client_id
-KINDE_CLIENT_SECRET=your_client_secret
-KINDE_ISSUER_URL=https://your-domain.kinde.com
-KINDE_SITE_URL=http://localhost:3000
-KINDE_POST_LOGOUT_REDIRECT_URL=http://localhost:3000
-KINDE_POST_LOGIN_REDIRECT_URL=http://localhost:3000/workspace
+cp .env.example .env.local
+
+# Then update .env.local with your real credentials
 ```
 
 1. Run the development server:
@@ -129,6 +125,46 @@ pnpm dev
 ```
 
 1. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### Arcjet Runtime Guard (Error Handling)
+
+Arcjet integration is centralized in `lib/arcjet.ts` and used by:
+
+- `app/middlewares/arcjet/read.ts`
+- `app/middlewares/arcjet/write.ts`
+- `app/middlewares/arcjet/standard.ts`
+- `app/middlewares/arcjet/heavy-write.ts`
+
+Behavior and edge cases:
+
+- If `ARCJET_KEY` is configured, middleware enforces Arcjet decisions normally.
+- If `ARCJET_KEY` is missing, the app logs a one-time warning and gracefully bypasses Arcjet checks.
+- If Arcjet fails at runtime for a request, the error is logged with middleware
+  context and only that request bypasses Arcjet.
+
+This design prevents hard crashes from missing configuration and keeps enforcement logic DRY in a shared helper.
+
+## ✅ Useful Commands
+
+```bash
+# Start local development
+pnpm dev
+
+# Validate required Arcjet env is present in the current shell
+pnpm check:arcjet-env
+
+# Type-check the whole project
+pnpm typecheck
+
+# Lint the project
+pnpm lint
+
+# Run tests once
+pnpm test -- --run
+
+# One-command CI-style verification
+pnpm verify
+```
 
 ## 🏗️ Architecture
 
