@@ -2,7 +2,7 @@ import arcjet, { slidingWindow } from "@/lib/arcjet";
 import { base } from "../base";
 import { KindeUser } from "@kinde-oss/kinde-auth-nextjs";
 
-const buildStandardAj = () =>
+const buildHeavyWriteAj = () =>
   arcjet.withRule(
     slidingWindow({
       mode: "LIVE",
@@ -16,7 +16,7 @@ export const heavyWriteSecurityMiddleware = base
     user: KindeUser<Record<string, unknown>>;
   }>()
   .middleware(async ({ context, next, errors }) => {
-    const decision = await buildStandardAj().protect(context.request, {
+    const decision = await buildHeavyWriteAj().protect(context.request, {
       userId: context.user.id,
     });
     if (decision.isDenied()) {
