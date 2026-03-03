@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import Link from "next/link";
 import { ArrowRight, ChevronRight } from "lucide-react";
@@ -8,8 +7,8 @@ import { TextEffect } from "@/components/ui/text-effect";
 import { AnimatedGroup } from "@/components/ui/animated-group";
 import { HeroHeader } from "./header";
 import BackgroundImage from "@/public/night-background.webp";
-import HeroLight from "@/public/screenshot-light.png";
-import HeroDark from "@/public/screenshot-dark.png";
+import HeroLight from "@/public/screenshot-light.webp";
+import HeroDark from "@/public/screenshot-dark.webp";
 import ArcjetLogo from "@/public/companies/arcjet.png";
 import KindeLogo from "@/public/companies/kindle.png";
 import VercelLogo from "@/public/companies/vercel.svg";
@@ -17,6 +16,7 @@ import PrismaLogo from "@/public/companies/prisma.svg";
 import NeonDbLogo from "@/public/companies/neon.png";
 import OrpcLogo from "@/public/companies/orpc.webp";
 import MotionLogo from "@/public/companies/motion.png";
+import OpenAiLogo from "@/public/companies/openai.svg";
 
 const transitionVariants = {
   item: {
@@ -198,14 +198,14 @@ export default function HeroSection() {
               <div className="mask-b-from-55% relative -mr-56 mt-8 overflow-hidden px-2 sm:mr-0 sm:mt-12 md:mt-20">
                 <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
                   <Image
-                    className="bg-background aspect-15/8 relative hidden rounded-2xl dark:block object-contain object-top"
+                    className="bg-background aspect-15/8 relative object-cover hidden rounded-2xl dark:block object-top"
                     src={HeroDark}
                     alt="app screen"
                     width="2700"
                     height="1440"
                   />
                   <Image
-                    className="z-2 border-border/25 aspect-15/8 relative rounded-2xl border dark:hidden object-contain object-top"
+                    className="z-2 border-border/25 aspect-15/8 relative rounded-2xl border dark:hidden object-cover object-top"
                     src={HeroLight}
                     alt="app screen"
                     width="2700"
@@ -281,12 +281,10 @@ export default function HeroSection() {
               </div>
 
               <div className="flex">
-                <img
+                <Image
                   className="mx-auto h-6 w-fit dark:invert"
-                  src="https://html.tailus.io/blocks/customers/openai.svg"
+                  src={OpenAiLogo}
                   alt="OpenAI Logo"
-                  height="24"
-                  width="auto"
                 />
               </div>
             </div>

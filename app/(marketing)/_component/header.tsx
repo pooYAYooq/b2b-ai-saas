@@ -33,6 +33,7 @@ import {
   LogoutLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { ThemeToggle } from "@/components/ui/them-toggle";
 
 /**
  * Navigation menu items displayed in the header.
@@ -180,6 +181,7 @@ export const HeroHeader = () => {
                       </div>
                     </>
                   )}
+                  <ThemeToggle buttonSize="sm" />
                 </div>
               )}
             </div>
