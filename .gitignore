@@ -43,3 +43,5 @@ next-env.d.ts
 
 # Os
 *:Zone.Identifier
+
+/lib/generated/prisma
