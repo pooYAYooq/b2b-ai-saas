@@ -1,5 +1,13 @@
 import z from "zod";
 
+/**
+ * Transforms a channel name by lowercasing it, replacing spaces with hyphens,
+ * removing special characters except hyphens, replacing multiple hyphens with a single one,
+ * and removing leading and trailing hyphens.
+ *
+ * @param {string} name - The channel name to transform
+ * @returns {string} - The transformed channel name
+ */
 export function transformChannelName(name: string): string {
   return name
     .toLowerCase()
@@ -37,3 +45,5 @@ export const channelNameSchema = z.object({
       return transformed;
     }),
 });
+
+export type ChannelSchemaNameType = z.infer<typeof channelNameSchema>;
